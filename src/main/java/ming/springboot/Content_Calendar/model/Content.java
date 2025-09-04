@@ -3,7 +3,7 @@ package ming.springboot.Content_Calendar.model;
 import java.time.LocalDateTime;
 
 public record Content(
-    int id,
+    Integer id,
     String title,
     String desc, 
     Status status,
