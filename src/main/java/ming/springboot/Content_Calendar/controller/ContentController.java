@@ -1,7 +1,6 @@
 package ming.springboot.Content_Calendar.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,13 +52,21 @@ public class ContentController {
     }
 
 
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/update/{id}")
     public void updateContent(@RequestBody Content content, @PathVariable Integer id) {
 
         if (!repository.existsbyId(id)) {
 
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "content not found");
+
         }
+
+        repository.addContent(content);
+        
+
+
 
     }
 

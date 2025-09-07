@@ -32,31 +32,21 @@ public class ContentCollectionRepository {
 
     public List<Content> addContent(Content data) {
 
+        content.removeIf(c -> c.id().equals(data.id()));
+
         content.add(data);
         return content;
 
     }
     
-    public Optional<Content> updateContent(Integer id, Content data) {
+    public boolean existsbyId(Integer id) {
 
-        Optional<Content> finding_content;
-        finding_content = content.stream().filter(c -> c.id().equals(id)).findFirst();
-        finding_content.ifPresent(oldData -> {
-            content.remove(oldData);
-            String title;
-            Content patch = new Content(
-                
-            id = data.id() ,
-            title = data.title();
-                    
-            );
-            content.add(patch);
-        });
-
-
-        return finding_content;
-
+        return content.stream().filter(c -> c.id().equals(id)).count() == 1;
+    
+    
+    
     }
+  
     @PostConstruct
     public void addData() {
         Content c = new Content(1,
@@ -80,6 +70,7 @@ public class ContentCollectionRepository {
                 content.add(c);
                 content.add(c2);
     }
+
 
     
     
