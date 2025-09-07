@@ -35,9 +35,28 @@ public class ContentCollectionRepository {
         content.add(data);
         return content;
 
+    }
+    
+    public Optional<Content> updateContent(Integer id, Content data) {
+
+        Optional<Content> finding_content;
+        finding_content = content.stream().filter(c -> c.id().equals(id)).findFirst();
+        finding_content.ifPresent(oldData -> {
+            content.remove(oldData);
+            String title;
+            Content patch = new Content(
+                
+            id = data.id() ,
+            title = data.title();
+                    
+            );
+            content.add(patch);
+        });
+
+
+        return finding_content;
 
     }
-
     @PostConstruct
     public void addData() {
         Content c = new Content(1,

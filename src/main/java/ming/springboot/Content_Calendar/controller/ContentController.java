@@ -1,11 +1,13 @@
 package ming.springboot.Content_Calendar.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,5 +51,17 @@ public class ContentController {
     public List<Content> addContent(@RequestBody Content provided_obj) {
         return repository.addContent(provided_obj);
     }
+
+
+    @PutMapping("/update/{id}")
+    public void updateContent(@RequestBody Content content, @PathVariable Integer id) {
+
+        if (!repository.existsbyId(id)) {
+
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "content not found");
+        }
+
+    }
+
 }
  
