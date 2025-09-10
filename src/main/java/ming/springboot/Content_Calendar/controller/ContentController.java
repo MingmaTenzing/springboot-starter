@@ -64,10 +64,19 @@ public class ContentController {
         }
 
         repository.addContent(content);
-        
 
+    }
+    
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping("/delete/{id}")
+    public void deleteContent(@PathVariable Integer id) {
+        if (repository.existsbyId(id)) {
+            repository.removeContentbyId(id);
+        }
+        else {
 
-
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "cannot find content");
+        }
     }
 
 }

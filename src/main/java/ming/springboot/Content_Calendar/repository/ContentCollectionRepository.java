@@ -42,9 +42,11 @@ public class ContentCollectionRepository {
     public boolean existsbyId(Integer id) {
 
         return content.stream().filter(c -> c.id().equals(id)).count() == 1;
+
+    }
     
-    
-    
+    public void removeContentbyId(Integer id) {
+        content.removeIf(c -> c.id().equals(id));
     }
   
     @PostConstruct
